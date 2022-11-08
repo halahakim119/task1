@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import './my_home_page_screen.dart';
-import './shapes_screen.dart';
+import 'package:task1/widgets/task4/task4_buttons.dart';
+import '../core/common/widget/instagram_layout.dart';
+import 'task1/my_home_page_screen.dart';
+import 'task2_shapes/shapes_screen.dart';
 
 class TasksScreen extends StatelessWidget {
   const TasksScreen({super.key});
@@ -11,21 +13,34 @@ class TasksScreen extends StatelessWidget {
       child: Scaffold(
         body: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton(
                 child: const Text("task 1"),
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Myhomepagescreen()));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => Myhomepagescreen()));
                 },
-              ),
-              const SizedBox(
-                height: 100,
               ),
               ElevatedButton(
                 child: const Text("task 2"),
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ShapesScreen()));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const ShapesScreen()));
+                },
+              ),
+              ElevatedButton(
+                child: const Text("task 3"),
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => InstagramLayout()));
+                },
+              ),
+              ElevatedButton(
+                child: const Text("task 4"),
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => Task4_Buttons()));
                 },
               ),
             ],
