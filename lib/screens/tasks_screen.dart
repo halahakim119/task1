@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task1/widgets/task5/api_widget.dart';
 import 'package:task1/widgets/task4/task4_buttons.dart';
 import '../core/common/widget/instagram_layout.dart';
 import 'task1/my_home_page_screen.dart';
@@ -43,6 +44,13 @@ class TasksScreen extends StatelessWidget {
                       builder: (context) => Task4_Buttons()));
                 },
               ),
+              ElevatedButton(
+                child: const Text("task 5"),
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) =>  Task5()));
+                },
+              ),
             ],
           ),
         ),
@@ -50,3 +58,4 @@ class TasksScreen extends StatelessWidget {
     );
   }
 }
+

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Task4Screen extends StatelessWidget {
-  String title;
+  String? title;
   Task4Screen(this.title);
 
   @override
@@ -10,7 +10,7 @@ class Task4Screen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(title: const Text('title')),
         body: Center(
-          child: Text(title),
+          child: Text(title??'no title available'),
         ),
       ),
     );
