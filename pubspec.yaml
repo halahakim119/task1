@@ -37,6 +37,9 @@ dependencies:
   custom_navigation_bar: ^0.8.2
   shimmer: ^2.0.0
   http: ^0.13.5
+  flutter_bloc: ^8.1.1
+  equatable: ^2.0.5
+  dio: ^4.0.6
 
 
   # The following adds the Cupertino Icons font to your application.
