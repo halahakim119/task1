@@ -1,26 +1,26 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
+
+import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'package:task1/random_joke/data/models/random_joke.dart';
 import 'package:task1/random_joke/data/network/joke_repo.dart';
 import 'dart:async';
 
 part 'joke_state.dart';
+part 'joke_cubit.freezed.dart';
 
 class JokeCubit extends Cubit<JokeState> {
   JokeRepo repo;
-  JokeCubit({required this.repo}) : super(JokeLoading());
-  @override
-  JokeState get initialState => JokeLoading();
+  JokeCubit({required this.repo}) : super(JokeState.loading());
 
   void fetchData() async {
-    emit(JokeLoading());
+    emit(JokeState.loading());
 
     try {
       final data = await repo.getJoke();
-      emit(JokeLoaded(data));
+      emit(JokeState.loaded(data));
     } catch (e) {
-      emit(JokeError(e.toString()));
+      emit(JokeState.error(e.toString()));
     }
   }
 }

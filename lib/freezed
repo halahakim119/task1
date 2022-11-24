@@ -1,0 +1,19 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+part 'freezed.freezed.dart';
+part 'freezed.g.dart';
+
+@freezed
+abstract class RandomJoke with _$RandomJoke{
+
+  const factory RandomJoke({
+    @JsonKey(name: 'id') int? id,
+     @JsonKey(name:'type') String? type,
+     @JsonKey(name:'setup') String? setup,
+    @JsonKey(name:'punchline') String? punchline,
+
+  }) = _RandomJoke;
+
+  factory RandomJoke.fromJson(Map<String, dynamic> json) =>
+      _$RandomJokeFromJson(json);
+  
+}

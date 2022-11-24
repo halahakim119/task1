@@ -36,51 +36,47 @@ class _RandomJokeScreenState extends State<RandomJokeScreen> {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(title: Text('randome jokes')),
-      body: BlocBuilder<JokeCubit, JokeState>(
+      body: BlocConsumer<JokeCubit, JokeState>(
+        listener: (context, state) {
+          state.maybeWhen(
+              error: (error) {
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(SnackBar(content: Text('$error')));
+              },
+              orElse: () {});
+        },
         builder: (context, state) {
-          if (state is JokeLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          if (state is JokeError) {
-            return Center(
-              child: Text(state.error),
-            );
-          }
-          var joke = (state as JokeLoaded).joke;
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Joke(joke),
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {});
-                  },
-                  child: const Text('load a new joke'),
+          return Scaffold(
+            body: Center(
+              child: state.when(
+                loading: () => const Center(
+                  child: CircularProgressIndicator(),
                 ),
-              ],
+                loaded: (joke) => Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('joke is type: ${joke.type}'),
+                    Text('joke: ${joke.setup}'),
+                    Text('joke answer: ${joke.punchline}'),
+                    ElevatedButton(
+                      onPressed: () {
+                        state.maybeWhen(
+                            loaded: (joke) =>
+                                context.read<JokeCubit>().fetchData(),
+                            orElse: () {});
+                      },
+                      child: const Text('load a new joke'),
+                    ),
+                  ],
+                ),
+                error: (error) => Center(
+                  child: Text(error.toString()),
+                ),
+              ),
             ),
           );
         },
       ),
     ));
-  }
-}
-
-class Joke extends StatelessWidget {
-  final joke;
-  const Joke(this.joke);
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text('joke is type: ${joke.type}'),
-        Text('joke: ${joke.setup}'),
-        Text('joke answer: ${joke.punchline}'),
-      ],
-    );
   }
 }
